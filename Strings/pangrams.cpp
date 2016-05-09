@@ -4,22 +4,20 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <cctype>
 using namespace std;
-
-bool isspace(char c){ return (c == ' ');  }
 
 int main(){
 
 	string s;
+	int i;
 	getline(cin, s);
-	cout << s << endl; 
-	string alphabet = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+	string alphabet = "abcdefghijklmnopqrstuvwxyz";
 	bool pangram = true;
-	for(int i = 0; i < alphabet.size()-1 && pangram; i++)
+	for(i = 0; i < alphabet.size() && pangram; i++)
 	{
-		if( (string::npos != s.find(alphabet[i])) || (string::npos != s.find(alphabet[i+1])) ) {
+		if(find (s.begin(), s.end(), alphabet[i]) == s.end() && find (s.begin(), s.end(), toupper(alphabet[i])) == s.end()){
 			pangram = false;
-			cout << alphabet[i] << endl;
 		}
 	}
 	if(pangram)
